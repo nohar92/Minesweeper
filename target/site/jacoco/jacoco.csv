@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Teszt,org.openjfx,SecondaryController,864,0,92,0,137,0,57,0,7,0
+Teszt,org.openjfx,GameView,502,0,8,0,91,0,28,0,24,0
+Teszt,org.openjfx,App,46,0,0,0,15,0,5,0,5,0
+Teszt,org.openjfx,PrimaryController,12,0,0,0,5,0,2,0,2,0
+Teszt,org.openjfx,Rekords,0,18,0,0,0,4,0,1,0,1
+Teszt,org.openjfx,Main,7,0,0,0,3,0,2,0,2,0
+Teszt,org.openjfx,Modell,634,217,123,23,120,41,76,16,12,7

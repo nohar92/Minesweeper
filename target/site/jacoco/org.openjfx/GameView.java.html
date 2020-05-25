@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Teszt</a> &gt; <a href="index.source.html" class="el_package">org.openjfx</a> &gt; <span class="el_source">GameView.java</span></div><h1>GameView.java</h1><pre class="source lang-java linenums">package org.openjfx;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import org.tinylog.Logger;
+
+public class GameView {
+
+
+<span class="nc" id="L17">    public static int spacing = 4;</span>
+    public static Image bomb;
+    public static Image flag;
+
+    static {
+<span class="nc" id="L22">        bomb = new Image(GameView.class.getResourceAsStream(&quot;bomb.png&quot;));</span>
+<span class="nc" id="L23">        flag = new Image(GameView.class.getResourceAsStream(&quot;flag2.png&quot;));</span>
+<span class="nc" id="L24">    }</span>
+
+    public GraphicsContext gc;
+<span class="nc" id="L27">    Alert alertWin = new Alert(Alert.AlertType.WARNING);</span>
+<span class="nc" id="L28">    Alert alertLose = new Alert(Alert.AlertType.WARNING);</span>
+<span class="nc" id="L29">    public int seconds = 0;</span>
+    private Timeline time;
+<span class="nc" id="L31">    private Label currentTime = new Label();</span>
+<span class="nc" id="L32">    private Label currentScore = new Label();</span>
+
+
+<span class="nc" id="L35">    public GameView() {</span>
+
+<span class="nc" id="L37">    }</span>
+
+    /**
+     * Set the gameboard, set the pop-up window messages.
+     *
+     * @param score  The Label where we write the score.
+     * @param timer  The Label where we write the time.
+     * @param canvas The Canvas what we use as a gameboard.
+     */
+<span class="nc" id="L46">    public GameView(Label score, Label timer, Canvas canvas) {</span>
+
+
+<span class="nc" id="L49">        currentTime = timer;</span>
+<span class="nc" id="L50">        currentScore = score;</span>
+<span class="nc" id="L51">        currentTime.setText(&quot;Time: 0&quot;);</span>
+<span class="nc" id="L52">        currentScore.setText(&quot;Score: 0&quot;);</span>
+<span class="nc" id="L53">        alertLose.setTitle(&quot;Pop-up window!&quot;);</span>
+<span class="nc" id="L54">        alertLose.setHeaderText(&quot;You clicked to the bomb field!&quot;);</span>
+<span class="nc" id="L55">        alertLose.setContentText(&quot;You lost! Try again!&quot;);</span>
+<span class="nc" id="L56">        alertWin.setTitle(&quot;Pop-up window!&quot;);</span>
+<span class="nc" id="L57">        alertWin.setHeaderText(&quot;You won!&quot;);</span>
+<span class="nc" id="L58">        alertWin.setContentText(&quot;Congratulations!&quot;);</span>
+<span class="nc" id="L59">        startTimer();</span>
+
+
+<span class="nc" id="L62">        gc = canvas.getGraphicsContext2D();</span>
+<span class="nc" id="L63">        gc.fillRect(0, 0, 640, 640);</span>
+<span class="nc" id="L64">        gc.setFill(Color.GRAY);</span>
+<span class="nc" id="L65">        Logger.info(&quot;The board drawing&quot;);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        for (int i = 0; i &lt; 12; i++) {</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            for (int j = 0; j &lt; 12; j++) {</span>
+<span class="nc" id="L68">                gc.fillRect(spacing + i * 40 - 2, spacing + j * 40 + 40, 40 - spacing, 40 - spacing);</span>
+            }
+        }
+
+<span class="nc" id="L72">    }</span>
+
+
+    /**
+     * Draw the bombs.
+     *
+     * @param x The x coordinate of the bomb.
+     * @param y The y coordinate of the bomb.
+     */
+    public void drawRedSquare(int x, int y) {
+<span class="nc" id="L82">        gc.setFill(Color.RED);</span>
+<span class="nc" id="L83">        gc.fillRect(spacing + x * 40 - 2, spacing + y * 40 + 40, 40 - spacing, 40 - spacing);</span>
+<span class="nc" id="L84">        Logger.info( &quot;Drawing the bombs&quot;);</span>
+<span class="nc" id="L85">        drawBomb(x, y);</span>
+
+<span class="nc" id="L87">    }</span>
+
+    /**
+     * Set the number's colour which are show the number of the bombs what the square has as its neighbors.
+     */
+
+    public void setGCBlue() {
+<span class="nc" id="L94">        gc.setStroke(Color.BLUE);</span>
+<span class="nc" id="L95">    }</span>
+
+    public void setGCGreen() {
+<span class="nc" id="L98">        gc.setStroke(Color.GREEN);</span>
+
+<span class="nc" id="L100">    }</span>
+
+    public void setGCRed() {
+<span class="nc" id="L103">        gc.setStroke(Color.RED);</span>
+<span class="nc" id="L104">    }</span>
+
+    public void setGCDarkBlue() {
+<span class="nc" id="L107">        gc.setStroke(Color.DARKBLUE);</span>
+<span class="nc" id="L108">    }</span>
+
+    public void setGCBrown() {
+<span class="nc" id="L111">        gc.setStroke(Color.BROWN);</span>
+<span class="nc" id="L112">    }</span>
+
+    public void setGCCyan() {
+<span class="nc" id="L115">        gc.setStroke(Color.CYAN);</span>
+<span class="nc" id="L116">    }</span>
+
+    public void setGCPurple() {
+<span class="nc" id="L119">        gc.setStroke(Color.PURPLE);</span>
+<span class="nc" id="L120">    }</span>
+
+    public void setGCDarkGray() {
+<span class="nc" id="L123">        gc.setStroke(Color.DARKGRAY);</span>
+<span class="nc" id="L124">    }</span>
+
+    /**
+     * Draw the number of the bombs what the square has as its neighbors.
+     *
+     * @param number The number of bombs.
+     * @param x      Number of the row.
+     * @param y      Number of the column.
+     */
+    public void drawNeighbourBombs(int number, int x, int y) {
+<span class="nc" id="L134">        gc.strokeText(String.valueOf(number), spacing + x * 40 - 2 + 14, spacing + y * 40 + 40 + 23);</span>
+
+<span class="nc" id="L136">    }</span>
+
+    /**
+     * Set the colour for the square which are appear due to our clicking (flip the field).
+     *
+     * @param x Number of the row.
+     * @param y Number of the column.
+     */
+    public void drawRevealed(int x, int y) {
+<span class="nc" id="L145">        gc.setFill(Color.WHITE);</span>
+<span class="nc" id="L146">        gc.fillRect(spacing + x * 40 - 2, spacing + y * 40 + 40, 40 - spacing, 40 - spacing);</span>
+
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * Draw the bomb image to the square.
+     *
+     * @param x Number of the row.
+     * @param y Number of the column.
+     */
+    public void drawBomb(int x, int y) {
+
+<span class="nc" id="L158">        gc.drawImage(bomb, spacing + x * 40 - 2, spacing + y * 40 + 40);</span>
+
+<span class="nc" id="L160">    }</span>
+
+    /**
+     * Draw the flag image to the square, what we get from x,y coordinates.
+     *
+     * @param x Number of the row.
+     * @param y Number of the column.
+     */
+
+    public void drawFlag(int x, int y) {
+<span class="nc" id="L170">        gc.drawImage(flag, spacing + x * 40 - 2, spacing + y * 40 + 40);</span>
+
+<span class="nc" id="L172">    }</span>
+
+    /**
+     * Picks up the flag.
+     *
+     * @param x Number of the row.
+     * @param y Number of the column.
+     */
+
+    public void getFlag(int x, int y) {
+<span class="nc" id="L182">        gc.setFill(Color.GRAY);</span>
+<span class="nc" id="L183">        gc.fillRect(spacing + x * 40-1, spacing + y * 40 + 40, 40 -  spacing-1, 40 - spacing);</span>
+<span class="nc" id="L184">        Logger.info(&quot;Picking up the flag&quot;);</span>
+<span class="nc" id="L185">    }</span>
+
+
+    public void setText(int score) {
+
+<span class="nc" id="L190">        currentScore.setText(String.valueOf(score));</span>
+
+<span class="nc" id="L192">    }</span>
+
+    /**
+     * Implementation of the timer.
+     */
+    public void startTimer() {
+
+<span class="nc" id="L199">        seconds = 0;</span>
+<span class="nc" id="L200">        time = new Timeline();</span>
+<span class="nc" id="L201">        time.setCycleCount(Timeline.INDEFINITE);</span>
+<span class="nc" id="L202">        time.getKeyFrames().add(new KeyFrame(Duration.seconds(1), e -&gt; {</span>
+<span class="nc" id="L203">            seconds++;</span>
+<span class="nc" id="L204">            currentTime.setText(&quot;Time: &quot; + seconds);</span>
+<span class="nc" id="L205">        }));</span>
+<span class="nc" id="L206">        time.play();</span>
+<span class="nc" id="L207">    }</span>
+
+    /**
+     *  Stop the timer.
+     */
+    public void stopTimer() {
+<span class="nc" id="L213">        time.stop();</span>
+<span class="nc" id="L214">    }</span>
+
+
+    /**
+     * Set the game to the starting state (game reset).
+     */
+    public void gameRestart() {
+
+
+<span class="nc" id="L223">        gc.setFill(Color.GRAY);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">        for (int i = 0; i &lt; 12; i++) {</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">            for (int j = 0; j &lt; 12; j++) {</span>
+<span class="nc" id="L226">                gc.fillRect(spacing + i * 40 - 2, spacing + j * 40 + 40, 40 - spacing, 40 - spacing);</span>
+            }
+        }
+<span class="nc" id="L229">        stopTimer();</span>
+<span class="nc" id="L230">        startTimer();</span>
+
+<span class="nc" id="L232">    }</span>
+
+    /**
+     *  The alert window pops up if you win.
+     */
+    public void showAlertWin() {
+<span class="nc" id="L238">        stopTimer();</span>
+<span class="nc" id="L239">        alertWin.showAndWait();</span>
+
+<span class="nc" id="L241">    }</span>
+
+    /**
+     *  The alert window pops up if you lose.
+     */
+    public void showAlertLose() {
+<span class="nc" id="L247">        stopTimer();</span>
+<span class="nc" id="L248">        alertLose.showAndWait();</span>
+
+<span class="nc" id="L250">    }</span>
+
+
+}
+
+
+
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

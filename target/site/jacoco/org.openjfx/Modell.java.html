@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Modell.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Teszt</a> &gt; <a href="index.source.html" class="el_package">org.openjfx</a> &gt; <span class="el_source">Modell.java</span></div><h1>Modell.java</h1><pre class="source lang-java linenums">package org.openjfx;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.util.Random;
+
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import org.tinylog.Logger;
+
+public class Modell {
+
+<span class="fc" id="L14">    boolean[][] bombs = new boolean[12][12];</span>
+<span class="fc" id="L15">    boolean[][] revealed = new boolean[12][12];</span>
+<span class="fc" id="L16">    boolean[][] flagged = new boolean[12][12];</span>
+
+<span class="fc" id="L18">    int score = 0;</span>
+<span class="fc" id="L19">    public static int spacing = 4;</span>
+
+<span class="fc" id="L21">    int max_score = 268;</span>
+<span class="fc" id="L22">    int max_bombs = 10;</span>
+<span class="fc" id="L23">    public Rekords rekords = new Rekords();</span>
+<span class="fc" id="L24">    String filename = &quot;records.json&quot;;</span>
+<span class="fc" id="L25">    public Gson gson = new Gson();</span>
+    FileOutputStream outputStream;
+
+    /**
+     * This method a rekordok objektum time,score és username listájához adja a paraméterként kapott értékeket.
+     * @param timeinsecond The time in seconds
+     * @param score  The player's score.
+     * @param username The player's name.
+     */
+
+    public void addToRecords(int timeinsecond, int score, String username){
+<span class="nc" id="L36">        rekords.time.add(timeinsecond);</span>
+<span class="nc" id="L37">        rekords.score.add(score);</span>
+<span class="nc" id="L38">        rekords.username.add(username);</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     * This method write to records.json file.
+     */
+
+    public void write(){
+
+
+<span class="nc" id="L48">        String s = gson.toJson(rekords);</span>
+
+        try {
+<span class="nc" id="L51">            outputStream = new FileOutputStream(&quot;records.json&quot;);</span>
+<span class="nc" id="L52">            outputStream.write(s.getBytes());</span>
+<span class="nc" id="L53">            outputStream.close();</span>
+<span class="nc" id="L54">        } catch (Exception e) {</span>
+<span class="nc" id="L55">            e.printStackTrace();</span>
+<span class="nc" id="L56">        }</span>
+<span class="nc" id="L57">    }</span>
+
+    /**
+     *This method read from filename file.
+     */
+    public void read(){
+        try {
+<span class="nc" id="L64">            JsonReader reader = new JsonReader(new FileReader(filename));</span>
+<span class="nc" id="L65">            rekords = gson.fromJson(reader,Rekords.class);</span>
+<span class="nc" id="L66">        } catch (FileNotFoundException e) {</span>
+<span class="nc" id="L67">            e.printStackTrace();</span>
+<span class="nc" id="L68">        }</span>
+
+<span class="nc" id="L70">    }</span>
+<span class="fc" id="L71">    public Modell(){</span>
+
+<span class="fc" id="L73">        generateBombs();</span>
+<span class="fc" id="L74">    }</span>
+
+    /**
+     *If the player's score is equal with the max_score then
+     * @return true
+     */
+    public boolean doYouWin(){
+
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        return max_score == score;</span>
+    }
+
+    /**
+     * This method randomly generate the places of the bombs.
+     */
+    public void generateBombs() {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        for (int i = 0; i &lt; 12; i++) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            for (int j = 0; j &lt; 12; j++) {</span>
+              //  System.out.println(i + &quot; &quot; + j);
+
+<span class="fc" id="L93">                bombs[i][j] = false;</span>
+<span class="fc" id="L94">                revealed[i][j] = false;</span>
+<span class="fc" id="L95">                flagged[i][j] = false;</span>
+            }}
+<span class="fc" id="L97">            Random randX = new Random();</span>
+<span class="fc" id="L98">            Random randY = new Random();</span>
+
+<span class="fc" id="L100">            int counter=0;</span>
+            do {
+<span class="fc" id="L102">               int rand1 = randX.nextInt(12);</span>
+<span class="fc" id="L103">               int rand2 = randY.nextInt(12);</span>
+
+<span class="fc bfc" id="L105" title="All 2 branches covered.">               if (!bombs[rand1][rand2]) {</span>
+<span class="fc" id="L106">                   bombs[rand1][rand2] = true;</span>
+<span class="fc" id="L107">                   counter++;</span>
+               }
+<span class="fc bfc" id="L109" title="All 2 branches covered.">           }while(counter != 10);</span>
+
+<span class="fc" id="L111">            Logger.info(&quot;Bombs generating!&quot;);</span>
+<span class="fc" id="L112">        }</span>
+
+
+
+    public boolean bombValue(int mx,int my){
+
+<span class="nc" id="L118">        return bombs[mx][my];</span>
+    }
+
+    /**
+     * @param mx The x coordinate of the mouse.
+     * @param my The y coordinate of the mouse.
+     * @return return The &lt;code&gt;row&lt;/code&gt; where we clicked with the mouse.
+     */
+
+
+    public int inboxX(int mx, int my) {
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        for (int i = 0; i &lt; 12; i++) {</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">            for (int j = 0; j &lt; 12; j++) {</span>
+<span class="pc bpc" id="L131" title="3 of 8 branches missed.">                if ((mx &gt;= spacing + i * 40 - 2) &amp;&amp; (mx &lt; spacing + i * 40 + 40 - spacing) &amp;&amp;</span>
+                        (my &gt;= spacing + j * 40 + 40) &amp;&amp; (my &lt; j * 40 + 80 - spacing)) {
+
+<span class="fc" id="L134">                    return i;</span>
+                }
+            }
+<span class="fc" id="L137">        }Logger.info(&quot; Defining the row's serial number&quot;);</span>
+
+<span class="fc" id="L139">        return -1;</span>
+    }
+    /**
+     * @param mx The x coordinate of the mouse.
+     * @param my The y coordinate of the mouse.
+     * @return The column where we clicked with the mouse.
+     */
+    public int inboxY(int mx, int my) {
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        for (int i = 0; i &lt; 12; i++) {</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            for (int j = 0; j &lt; 12; j++) {</span>
+<span class="pc bpc" id="L149" title="7 of 8 branches missed.">                if ((mx &gt;= spacing + i * 40 - 2) &amp;&amp; (mx &lt; spacing + i * 40 + 40 - spacing) &amp;&amp;</span>
+                        (my &gt;= spacing + j * 40 + 40) &amp;&amp; (my &lt; j * 40 + 80 - spacing)) {
+
+<span class="nc" id="L152">                    return j;</span>
+                }
+            }
+        }
+
+<span class="fc" id="L157">        return -1;</span>
+    }
+
+    /**
+     *  This method define how many bombs has the field's neighbours.
+     * @param x Serial number of the row.
+     * @param y Serial number of the column.
+     * @return The number of the bombs.
+     */
+
+    int neighbourNumber(int x, int y) {
+<span class="nc" id="L168">        int i = 0;</span>
+<span class="nc bnc" id="L169" title="All 4 branches missed.">        if (x == 0 &amp;&amp; y == 11) {</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            if (bombs[x][y - 1])</span>
+<span class="nc" id="L171">                i++;</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            if (bombs[x + 1][y - 1])</span>
+<span class="nc" id="L173">                i++;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">            if (bombs[x + 1][y])</span>
+<span class="nc" id="L175">                i++;</span>
+<span class="nc bnc" id="L176" title="All 4 branches missed.">        } else if (x == 11 &amp;&amp; y == 0) {</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">            if (bombs[x][y + 1])</span>
+<span class="nc" id="L178">                i++;</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            if (bombs[x - 1][y + 1])</span>
+<span class="nc" id="L180">                i++;</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">            if (bombs[x - 1][y])</span>
+<span class="nc" id="L182">                i++;</span>
+<span class="nc bnc" id="L183" title="All 4 branches missed.">        } else if (x == 0 &amp;&amp; y == 0) {</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">            if (bombs[x][y + 1])</span>
+<span class="nc" id="L185">                i++;</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">            if (bombs[x + 1][y + 1])</span>
+<span class="nc" id="L187">                i++;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">            if (bombs[x + 1][y])</span>
+<span class="nc" id="L189">                i++;</span>
+<span class="nc bnc" id="L190" title="All 4 branches missed.">        } else if (x == 11 &amp;&amp; y == 11) {</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">            if (bombs[x][y - 1])</span>
+<span class="nc" id="L192">                i++;</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">            if (bombs[x - 1][y - 1])</span>
+<span class="nc" id="L194">                i++;</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">            if (bombs[x - 1][y])</span>
+<span class="nc" id="L196">                i++;</span>
+<span class="nc bnc" id="L197" title="All 4 branches missed.">        } else if (x == 11 &amp;&amp; y != 0) {</span>
+
+<span class="nc bnc" id="L199" title="All 2 branches missed.">            if (bombs[x][y - 1])</span>
+<span class="nc" id="L200">                i++;</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            if (bombs[x][y + 1])</span>
+<span class="nc" id="L202">                i++;</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">            if (bombs[x - 1][y - 1])</span>
+<span class="nc" id="L204">                i++;</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            if (bombs[x - 1][y + 1])</span>
+<span class="nc" id="L206">                i++;</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            if (bombs[x - 1][y])</span>
+<span class="nc" id="L208">                i++;</span>
+<span class="nc bnc" id="L209" title="All 4 branches missed.">        } else if (x != 0 &amp;&amp; y == 11) {</span>
+
+<span class="nc bnc" id="L211" title="All 2 branches missed.">            if (bombs[x][y - 1])</span>
+<span class="nc" id="L212">                i++;</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">            if (bombs[x + 1][y - 1])</span>
+<span class="nc" id="L214">                i++;</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">            if (bombs[x - 1][y - 1])</span>
+<span class="nc" id="L216">                i++;</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">            if (bombs[x - 1][y])</span>
+<span class="nc" id="L218">                i++;</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            if (bombs[x + 1][y])</span>
+<span class="nc" id="L220">                i++;</span>
+<span class="nc bnc" id="L221" title="All 4 branches missed.">        } else if (x == 0 &amp;&amp; y != 11) {</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">            if (bombs[x][y - 1])</span>
+<span class="nc" id="L223">                i++;</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">            if (bombs[x][y + 1])</span>
+<span class="nc" id="L225">                i++;</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">            if (bombs[x + 1][y - 1])</span>
+<span class="nc" id="L227">                i++;</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">            if (bombs[x + 1][y])</span>
+<span class="nc" id="L229">                i++;</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">            if (bombs[x + 1][y + 1])</span>
+<span class="nc" id="L231">                i++;</span>
+<span class="nc bnc" id="L232" title="All 4 branches missed.">        } else if (y == 0 &amp;&amp; x != 11) {</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">            if (bombs[x + 1][y])</span>
+<span class="nc" id="L234">                i++;</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">            if (bombs[x - 1][y])</span>
+<span class="nc" id="L236">                i++;</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">            if (bombs[x + 1][y + 1])</span>
+<span class="nc" id="L238">                i++;</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            if (bombs[x - 1][y + 1])</span>
+<span class="nc" id="L240">                i++;</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">            if (bombs[x][y + 1])</span>
+<span class="nc" id="L242">                i++;</span>
+        } else {
+<span class="nc bnc" id="L244" title="All 2 branches missed.">            if (bombs[x - 1][y - 1])</span>
+<span class="nc" id="L245">                i++;</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">            if (bombs[x - 1][y])</span>
+<span class="nc" id="L247">                i++;</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">            if (bombs[x - 1][y + 1])</span>
+<span class="nc" id="L249">                i++;</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">            if (bombs[x][y - 1])</span>
+<span class="nc" id="L251">                i++;</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">            if (bombs[x][y + 1])</span>
+<span class="nc" id="L253">                i++;</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">            if (bombs[x + 1][y - 1])</span>
+<span class="nc" id="L255">                i++;</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            if (bombs[x + 1][y])</span>
+<span class="nc" id="L257">                i++;</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">            if (bombs[x + 1][y + 1])</span>
+<span class="nc" id="L259">                i++;</span>
+
+        }
+<span class="nc" id="L262">        return i;</span>
+
+    }
+
+    public boolean getRevealed(int x, int y) {
+<span class="nc" id="L267">        return revealed [x][y];</span>
+    }
+
+    public void setRevealed(int x, int y) {
+<span class="nc" id="L271">        revealed [x][y] = true;</span>
+<span class="nc" id="L272">    }</span>
+
+    public boolean getFlagged(int x, int y) {
+<span class="nc" id="L275">        return flagged[x][y];</span>
+    }
+
+    public void setFlagged(int x, int y, boolean b) {
+<span class="nc" id="L279">         flagged[x][y] = b;</span>
+<span class="nc" id="L280">    }</span>
+
+<span class="nc" id="L282">    public int getScore() { return score; }</span>
+
+<span class="nc" id="L284">    public void setScore(int score) { this.score += score; }</span>
+
+    public boolean getBombs(int i, int j) {
+<span class="fc" id="L287">        return bombs[i][j];</span>
+    }
+
+    public void restart() {
+<span class="nc" id="L291">        generateBombs();</span>
+
+<span class="nc" id="L293">    }</span>
+}
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

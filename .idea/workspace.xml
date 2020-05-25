@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="20809a46-dfff-41ab-b7d6-0a83c29c8893" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Szoftverfejlesztes" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1cAc4AlT08qEfUwQxKesa7dMsAV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.openjfx" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/org/openjfx" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.openjfx.App" />
+      <module name="Teszt" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.openjfx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.openjfx.Main" />
+      <module name="Teszt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.openjfx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModellTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Teszt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.openjfx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.openjfx" />
+      <option name="MAIN_CLASS_NAME" value="org.openjfx.ModellTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModellTest.testCoordinateX" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Teszt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.openjfx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.openjfx" />
+      <option name="MAIN_CLASS_NAME" value="org.openjfx.ModellTest" />
+      <option name="METHOD_NAME" value="testCoordinateX" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModellTest.testGeneratedBombs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Teszt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.openjfx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.openjfx" />
+      <option name="MAIN_CLASS_NAME" value="org.openjfx.ModellTest" />
+      <option name="METHOD_NAME" value="testGeneratedBombs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.ModellTest" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.ModellTest.testCoordinateX" />
+        <item itemvalue="JUnit.ModellTest.testGeneratedBombs" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="20809a46-dfff-41ab-b7d6-0a83c29c8893" name="Default Changelist" comment="" />
+      <created>1589974644712</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589974644712</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1475" y="87" width="1366" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590279394066">
+      <screen x="1366" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1475" y="87" width="1366" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590279394066" />
+    <state x="995" y="109" width="327" height="626" key="#com.intellij.ide.util.MemberChooser" timestamp="1590349858855">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state x="995" y="109" width="327" height="626" key="#com.intellij.ide.util.MemberChooser/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590349858855" />
+    <state x="2765" y="160" width="320" height="916" key="#com.intellij.ide.util.MemberChooser/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590138663221" />
+    <state x="2395" y="109" width="378" height="625" key="#com.intellij.ide.util.MemberChooser/0.0.3286.737@0.0.3286.737" timestamp="1590080374902" />
+    <state x="2522" y="232" width="528" height="502" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1590066933236">
+      <screen x="0" y="0" width="3286" height="737" />
+    </state>
+    <state x="2522" y="232" width="528" height="502" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.3286.737@0.0.3286.737" timestamp="1590066933236" />
+    <state x="966" y="253" width="400" height="482" key="FileChooserDialogImpl" timestamp="1590366606660">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state x="966" y="253" width="400" height="482" key="FileChooserDialogImpl/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590366606660" />
+    <state x="2751" y="371" width="400" height="705" key="FileChooserDialogImpl/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590341300402" />
+    <state x="2370" y="253" width="428" height="481" key="FileChooserDialogImpl/0.0.3286.737@0.0.3286.737" timestamp="1590091988280" />
+    <state width="1316" height="213" key="GridCell.Tab.0.bottom" timestamp="1590366374050">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1316" height="213" key="GridCell.Tab.0.bottom/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590366374050" />
+    <state width="1870" height="2" key="GridCell.Tab.0.bottom/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590340896002" />
+    <state width="1344" height="234" key="GridCell.Tab.0.bottom/0.0.3286.737@0.0.3286.737" timestamp="1590095232630" />
+    <state width="1316" height="213" key="GridCell.Tab.0.center" timestamp="1590366374049">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1316" height="213" key="GridCell.Tab.0.center/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590366374049" />
+    <state width="1870" height="2" key="GridCell.Tab.0.center/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590340896001" />
+    <state width="1344" height="234" key="GridCell.Tab.0.center/0.0.3286.737@0.0.3286.737" timestamp="1590095232629" />
+    <state width="1316" height="213" key="GridCell.Tab.0.left" timestamp="1590366374049">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1316" height="213" key="GridCell.Tab.0.left/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590366374049" />
+    <state width="1870" height="2" key="GridCell.Tab.0.left/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590340896001" />
+    <state width="1344" height="234" key="GridCell.Tab.0.left/0.0.3286.737@0.0.3286.737" timestamp="1590095232628" />
+    <state width="1316" height="213" key="GridCell.Tab.0.right" timestamp="1590366374049">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1316" height="213" key="GridCell.Tab.0.right/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590366374049" />
+    <state width="1870" height="2" key="GridCell.Tab.0.right/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590340896001" />
+    <state width="1344" height="234" key="GridCell.Tab.0.right/0.0.3286.737@0.0.3286.737" timestamp="1590095232629" />
+    <state width="1344" height="353" key="GridCell.Tab.1.bottom" timestamp="1590146211298">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1344" height="353" key="GridCell.Tab.1.bottom/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590146211298" />
+    <state width="1344" height="353" key="GridCell.Tab.1.bottom/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590136302889" />
+    <state width="1344" height="353" key="GridCell.Tab.1.center" timestamp="1590146211298">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1344" height="353" key="GridCell.Tab.1.center/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590146211298" />
+    <state width="1344" height="353" key="GridCell.Tab.1.center/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590136302888" />
+    <state width="1344" height="353" key="GridCell.Tab.1.left" timestamp="1590146211298">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1344" height="353" key="GridCell.Tab.1.left/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590146211298" />
+    <state width="1344" height="353" key="GridCell.Tab.1.left/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590136302888" />
+    <state width="1344" height="353" key="GridCell.Tab.1.right" timestamp="1590146211298">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state width="1344" height="353" key="GridCell.Tab.1.right/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590146211298" />
+    <state width="1344" height="353" key="GridCell.Tab.1.right/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590136302888" />
+    <state x="2243" y="198" width="928" height="681" key="Maven.ArtifactSearchDialog" timestamp="1590163648793">
+      <screen x="1366" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2243" y="198" width="928" height="681" key="Maven.ArtifactSearchDialog/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590163648793" />
+    <state x="164" y="4" key="SettingsEditor" timestamp="1590366555546">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state x="164" y="4" key="SettingsEditor/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590366555546" />
+    <state x="2126" y="287" key="com.intellij.ide.util.TipDialog" timestamp="1590332048716">
+      <screen x="1366" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2126" y="287" key="com.intellij.ide.util.TipDialog/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590332048716" />
+    <state x="541" y="196" key="com.intellij.ide.util.TipDialog/0.0.1366.737@0.0.1366.737" timestamp="1590146269004" />
+    <state x="2240" y="158" width="687" height="761" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590139385472">
+      <screen x="1366" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2240" y="158" width="687" height="761" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590139385472" />
+    <state x="462" y="26" width="460" height="583" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1590336422587">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state x="462" y="26" width="460" height="583" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590336422587" />
+    <state x="2483" y="0" width="605" height="734" key="refactoring.ChangeSignatureDialog" timestamp="1590076623689">
+      <screen x="0" y="0" width="3286" height="737" />
+    </state>
+    <state x="2483" y="0" width="605" height="734" key="refactoring.ChangeSignatureDialog/0.0.3286.737@0.0.3286.737" timestamp="1590076623689" />
+    <state x="443" y="169" key="run.anything.popup" timestamp="1590349284747">
+      <screen x="0" y="0" width="1366" height="737" />
+    </state>
+    <state x="443" y="169" key="run.anything.popup/0.0.1366.737/1366.0.1920.1080@0.0.1366.737" timestamp="1590349284747" />
+    <state x="1988" y="248" key="run.anything.popup/0.0.1366.737/1366.0.1920.1080@1366.0.1920.1080" timestamp="1590168463111" />
+  </component>
+</project>

@@ -1,0 +1,26 @@
+2020-05-25 02:23:40 [JavaFX Application Thread] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!
+2020-05-25 02:23:40 [JavaFX Application Thread] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!
+2020-05-25 02:23:40 [JavaFX Application Thread] org.openjfx.GameView.<init>()
+INFO: The board drawing
+2020-05-25 02:23:42 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:43 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:43 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:44 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:47 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:47 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:49 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:53 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:23:57 [JavaFX Application Thread] org.openjfx.SecondaryController.handleSecondaryClick()
+INFO: Placing the flag
+2020-05-25 02:24:05 [JavaFX Application Thread] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!

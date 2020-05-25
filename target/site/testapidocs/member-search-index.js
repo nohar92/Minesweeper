@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"org.openjfx","c":"ModellTest","l":"doYouWinTest()"},{"p":"org.openjfx","c":"ModellTest","l":"generateBombsTest()"},{"p":"org.openjfx","c":"ModellTest","l":"inboxXTest()"},{"p":"org.openjfx","c":"ModellTest","l":"inboxYTest()"},{"p":"org.openjfx","c":"ModellTest","l":"ModellTest()","url":"%3Cinit%3E()"}]

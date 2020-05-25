@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecondaryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Teszt</a> &gt; <a href="index.source.html" class="el_package">org.openjfx</a> &gt; <span class="el_source">SecondaryController.java</span></div><h1>SecondaryController.java</h1><pre class="source lang-java linenums">package org.openjfx;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import java.net.URL;
+import java.util.ResourceBundle;
+import org.tinylog.Logger;
+
+<span class="nc" id="L12">public class SecondaryController implements Initializable {</span>
+
+    GameView gameView;
+<span class="nc" id="L15">    Modell modell  = new Modell();</span>
+    @FXML
+    private Label score;
+    @FXML
+    private Label timer;
+    @FXML
+    private Canvas canvas;
+    public String username;
+
+    @FXML
+    public void restart() {
+
+<span class="nc" id="L27">        modell.score = 0;</span>
+<span class="nc" id="L28">        gameView.gameRestart();</span>
+<span class="nc" id="L29">        gameView.setText(modell.getScore());</span>
+<span class="nc" id="L30">        modell.restart();</span>
+
+<span class="nc" id="L32">    }</span>
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+<span class="nc" id="L37">        modell = new Modell();</span>
+<span class="nc" id="L38">        gameView = new GameView(score, timer, canvas);</span>
+<span class="nc" id="L39">        modell.read();</span>
+<span class="nc" id="L40">        canvas.setOnMouseClicked(mouseEvent -&gt; {</span>
+<span class="nc bnc" id="L41" title="All 3 branches missed.">            switch (mouseEvent.getButton()) {</span>
+                case PRIMARY:
+<span class="nc" id="L43">                    handlePrimaryClick(mouseEvent.getX(), mouseEvent.getY());</span>
+<span class="nc" id="L44">                    break;</span>
+                case SECONDARY:
+<span class="nc" id="L46">                    handleSecondaryClick(mouseEvent.getX(), mouseEvent.getY());</span>
+                    break;
+            }
+<span class="nc" id="L49">        });</span>
+<span class="nc" id="L50">    }</span>
+
+    /**
+     * This method turns up the field where we click with a left mouse button.
+     * If the field hide a bomb than the method draw all of the bombs and we get a pop-up message which is tell that we lost.
+     * If we close the message window, we will get a new chance for win. (game reset).
+     * But if we turns up every field except bombs, we will get a pop-up  message which is tell that we won.
+     * @param x The x coordinate where we clicked.
+     * @param y The y coordinate where we clicked.
+     */
+    private void handlePrimaryClick(double x, double y) {
+
+<span class="nc" id="L62">        gameView.gc.setFill(Color.WHITE);</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">        if (modell.inboxX((int) x, (int) y) != -1 &amp;&amp; modell.inboxY((int) x, (int) y) != -1 &amp;&amp;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                !modell.getRevealed(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y))) {</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (modell.bombValue(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y))) {</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                for (int i = 0; i &lt; 12; i++)</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                    for (int j = 0; j &lt; 12; j++)</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                        if (modell.bombValue(i, j)) {</span>
+<span class="nc" id="L69">                            gameView.drawRedSquare(i, j);</span>
+                        }
+<span class="nc" id="L71">                modell.addToRecords(gameView.seconds,modell.getScore(),PrimaryController.user);</span>
+<span class="nc" id="L72">                modell.write();</span>
+<span class="nc" id="L73">                gameView.showAlertLose();</span>
+<span class="nc" id="L74">                gameView.stopTimer();</span>
+<span class="nc" id="L75">                restart();</span>
+            } else {
+<span class="nc" id="L77">                gameView.gc.fillRect(GameView.spacing + modell.inboxX((int) x, (int) y) * 40 - 2,</span>
+<span class="nc" id="L78">                        GameView.spacing + modell.inboxY((int) x, (int) y) * 40 + 40, 40 - GameView.spacing, 40 - GameView.spacing);</span>
+<span class="nc" id="L79">                neighbour(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y));</span>
+<span class="nc" id="L80">                gameView.setText(modell.getScore());</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                if (modell.doYouWin()) {</span>
+<span class="nc" id="L83">                    modell.addToRecords(gameView.seconds,modell.getScore(),PrimaryController.user);</span>
+<span class="nc" id="L84">                    modell.write();</span>
+<span class="nc" id="L85">                    gameView.showAlertWin();</span>
+
+
+<span class="nc" id="L88">                    restart();</span>
+                }
+            }
+        }
+<span class="nc" id="L92">    }</span>
+
+    /**
+     * This method take care of the right mouse button.
+     * If we click to the field which is not revealed and there is no flag on it,then put down one flag
+     * If the field already has a flag then the click will pick it up.
+     * (-1)
+     * @param x The x coordinate where we clicked.
+     * @param y The y coordinate where we clicked.
+     */
+    private void handleSecondaryClick(double x, double y) {
+<span class="nc bnc" id="L103" title="All 4 branches missed.">        if (modell.inboxX((int) x, (int) y) != -1 &amp;&amp; modell.inboxY((int) x, (int) y) != -1 &amp;&amp;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">                !modell.getRevealed(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y)) &amp;&amp;</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">                !modell.getFlagged(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y))) {</span>
+<span class="nc" id="L106">            gameView.drawFlag(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y));</span>
+<span class="nc" id="L107">            Logger.info(&quot;Placing the flag&quot;);</span>
+<span class="nc" id="L108">            modell.setFlagged(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y), true);</span>
+
+<span class="nc bnc" id="L110" title="All 4 branches missed.">        } else if (modell.inboxX((int) x, (int) y) != -1 &amp;&amp; modell.inboxY((int) x, (int) y) != -1 &amp;&amp;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                !modell.getRevealed(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y)) &amp;&amp;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">                modell.getFlagged(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y))) {</span>
+<span class="nc" id="L113">            modell.setFlagged(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y), false);</span>
+<span class="nc" id="L114">            gameView.getFlag(modell.inboxX((int) x, (int) y), modell.inboxY((int) x, (int) y));</span>
+
+        }
+
+<span class="nc" id="L118">    }</span>
+
+    /**
+     *This method firstly get the number of adjacent bombs.
+     *Flip the field and draw the number of the bomb with a proper colour but only if there is at least one bomb.
+     *If there is no bomb (number=0) then flip the fields until we do not find a field which has a neighbour with bomb
+     * and then the method draw the number of the bomb with a proper colour.
+     * @param x The field's row number.
+     * @param y The field's column number.
+     */
+    public void neighbour(int x, int y) {
+
+
+<span class="nc" id="L131">        int number = modell.neighbourNumber(x, y);</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if (number &gt; 0) {</span>
+<span class="nc bnc" id="L133" title="All 9 branches missed.">            switch (number) {</span>
+                case 1:
+<span class="nc" id="L135">                    gameView.setGCBlue();</span>
+<span class="nc" id="L136">                    break;</span>
+                case 2:
+<span class="nc" id="L138">                    gameView.setGCGreen();</span>
+<span class="nc" id="L139">                    break;</span>
+                case 3:
+<span class="nc" id="L141">                    gameView.setGCRed();</span>
+<span class="nc" id="L142">                    break;</span>
+                case 4:
+<span class="nc" id="L144">                    gameView.setGCDarkBlue();</span>
+<span class="nc" id="L145">                    break;</span>
+                case 5:
+<span class="nc" id="L147">                    gameView.setGCBrown();</span>
+<span class="nc" id="L148">                    break;</span>
+                case 6:
+<span class="nc" id="L150">                    gameView.setGCCyan();</span>
+<span class="nc" id="L151">                    break;</span>
+                case 7:
+<span class="nc" id="L153">                    gameView.setGCPurple();</span>
+<span class="nc" id="L154">                    break;</span>
+                case 8:
+<span class="nc" id="L156">                    gameView.setGCDarkGray();</span>
+                    break;
+
+            }
+
+
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            if (modell.getRevealed(x, y) == false) {</span>
+
+<span class="nc" id="L164">                gameView.drawRevealed(x, y);</span>
+<span class="nc" id="L165">                gameView.drawNeighbourBombs(number, x, y);</span>
+<span class="nc" id="L166">                modell.setRevealed(x, y);</span>
+<span class="nc" id="L167">                modell.setScore(2);</span>
+
+            }
+        } else {
+<span class="nc bnc" id="L171" title="All 4 branches missed.">            while (number == 0 &amp;&amp; !modell.getRevealed(x, y)) {</span>
+
+<span class="nc" id="L173">                modell.setRevealed(x, y);</span>
+<span class="nc" id="L174">                gameView.drawRevealed(x, y);</span>
+<span class="nc" id="L175">                modell.setScore(2);</span>
+
+<span class="nc bnc" id="L177" title="All 4 branches missed.">                if (x == 0 &amp;&amp; y == 11) {</span>
+<span class="nc" id="L178">                    neighbour(x, y - 1);</span>
+<span class="nc" id="L179">                    neighbour(x + 1, y - 1);</span>
+<span class="nc" id="L180">                    neighbour(x + 1, y);</span>
+<span class="nc" id="L181">                    break;</span>
+<span class="nc bnc" id="L182" title="All 4 branches missed.">                } else if (x == 11 &amp;&amp; y == 0) {</span>
+<span class="nc" id="L183">                    neighbour(x, y + 1);</span>
+<span class="nc" id="L184">                    neighbour(x - 1, y + 1);</span>
+<span class="nc" id="L185">                    neighbour(x - 1, y);</span>
+<span class="nc" id="L186">                    break;</span>
+<span class="nc bnc" id="L187" title="All 4 branches missed.">                } else if (x == 0 &amp;&amp; y == 0) {</span>
+<span class="nc" id="L188">                    neighbour(x, y + 1);</span>
+<span class="nc" id="L189">                    neighbour(x + 1, y + 1);</span>
+<span class="nc" id="L190">                    neighbour(x + 1, y);</span>
+<span class="nc" id="L191">                    break;</span>
+<span class="nc bnc" id="L192" title="All 4 branches missed.">                } else if (x == 11 &amp;&amp; y == 11) {</span>
+<span class="nc" id="L193">                    neighbour(x, y - 1);</span>
+<span class="nc" id="L194">                    neighbour(x - 1, y - 1);</span>
+<span class="nc" id="L195">                    neighbour(x - 1, y);</span>
+<span class="nc" id="L196">                    break;</span>
+
+<span class="nc bnc" id="L198" title="All 4 branches missed.">                } else if (x == 11 &amp;&amp; y != 0) {</span>
+<span class="nc" id="L199">                    neighbour(x, y - 1);</span>
+<span class="nc" id="L200">                    neighbour(x, y + 1);</span>
+<span class="nc" id="L201">                    neighbour(x - 1, y - 1);</span>
+<span class="nc" id="L202">                    neighbour(x - 1, y);</span>
+<span class="nc" id="L203">                    neighbour(x - 1, y + 1);</span>
+<span class="nc" id="L204">                    break;</span>
+<span class="nc bnc" id="L205" title="All 4 branches missed.">                } else if (x != 0 &amp;&amp; y == 11) {</span>
+<span class="nc" id="L206">                    neighbour(x, y - 1);</span>
+<span class="nc" id="L207">                    neighbour(x - 1, y - 1);</span>
+<span class="nc" id="L208">                    neighbour(x - 1, y);</span>
+<span class="nc" id="L209">                    neighbour(x + 1, y - 1);</span>
+<span class="nc" id="L210">                    neighbour(x + 1, y);</span>
+<span class="nc" id="L211">                    break;</span>
+<span class="nc bnc" id="L212" title="All 4 branches missed.">                } else if (x == 0 &amp;&amp; y != 11) {</span>
+<span class="nc" id="L213">                    neighbour(x, y - 1);</span>
+<span class="nc" id="L214">                    neighbour(x, y + 1);</span>
+<span class="nc" id="L215">                    neighbour(x + 1, y - 1);</span>
+<span class="nc" id="L216">                    neighbour(x + 1, y);</span>
+<span class="nc" id="L217">                    neighbour(x + 1, y + 1);</span>
+<span class="nc" id="L218">                    break;</span>
+<span class="nc bnc" id="L219" title="All 4 branches missed.">                } else if (y == 0 &amp;&amp; x != 11) {</span>
+<span class="nc" id="L220">                    neighbour(x + 1, y);</span>
+<span class="nc" id="L221">                    neighbour(x - 1, y);</span>
+<span class="nc" id="L222">                    neighbour(x + 1, y + 1);</span>
+<span class="nc" id="L223">                    neighbour(x - 1, y + 1);</span>
+<span class="nc" id="L224">                    neighbour(x, y + 1);</span>
+<span class="nc" id="L225">                    break;</span>
+<span class="nc bnc" id="L226" title="All 8 branches missed.">                } else if (y &gt; 0 &amp;&amp; x &lt; 11 &amp;&amp; y &lt; 11 &amp;&amp; x &gt; 0) {</span>
+<span class="nc" id="L227">                    neighbour(x - 1, y - 1);</span>
+<span class="nc" id="L228">                    neighbour(x - 1, y);</span>
+<span class="nc" id="L229">                    neighbour(x - 1, y + 1);</span>
+<span class="nc" id="L230">                    neighbour(x, y - 1);</span>
+<span class="nc" id="L231">                    neighbour(x, y + 1);</span>
+<span class="nc" id="L232">                    neighbour(x + 1, y - 1);</span>
+<span class="nc" id="L233">                    neighbour(x + 1, y);</span>
+<span class="nc" id="L234">                    neighbour(x + 1, y + 1);</span>
+                    break;
+                } else {
+                    break;
+                }
+
+            }
+        }
+
+<span class="nc" id="L243">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

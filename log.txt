@@ -1,0 +1,12 @@
+2020-05-25 02:20:53 [main] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!
+2020-05-25 02:20:53 [main] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!
+2020-05-25 02:20:53 [main] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!
+2020-05-25 02:20:53 [main] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!
+2020-05-25 02:20:53 [main] org.openjfx.Modell.inboxX()
+INFO:  Defining the row's serial number
+2020-05-25 02:20:53 [main] org.openjfx.Modell.generateBombs()
+INFO: Bombs generating!
